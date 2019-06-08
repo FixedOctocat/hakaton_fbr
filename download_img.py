@@ -16,8 +16,9 @@ def url_getting(stroka_egora):
     return vk_user_data
     
 
-def download_image(vk_user_data):
-    path = "/home/maska/Downloads/photos/"
+def download_image_func(vk_str):
+    vk_user_data = url_getting(vk_str)
+    path = "/home/Documents/hakaton_fbr/photos/"
     urllib.request.urlretrieve(vk_user_data[0],path+'.jpg')  
     file = open(path+".txt", 'w')
     file.write(vk_user_data[1])
