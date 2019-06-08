@@ -2,13 +2,6 @@ import vk_api
 from vk_api.longpoll import VkLongPoll, VkEventType
 from vk_bot import VkBot
 from vk_api.utils import get_random_id
-import threading
-from time import sleep
-
-def wait_write(user_id, n):
-    sleep(n)
-    res = {"text": f"Может сделаешь перерыв?)", "keyboard": None, "thread": None}
-    write_msg(user_id, res)
 
 def write_msg(user_id, message):
     if message['thread'] == 'work':
