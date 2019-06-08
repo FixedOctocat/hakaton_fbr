@@ -7,6 +7,6 @@ def face_compare_func(img1, img2):
     unknown_face_encoding = face_recognition.face_encodings(unknown_picture)[0]
     results = face_recognition.compare_faces([face], unknown_face_encoding)
     if results[0] == True:
-        print( "Success!")
+        return True
     else:
-        print("Failed")
+        return False
