@@ -6,7 +6,7 @@ from vk_api.utils import get_random_id
 def write_msg(user_id, message):
     vk.method('messages.send', {'user_id': user_id, 'message': message['text'], 'keyboard': message['keyboard'], 'random_id': get_random_id()})
 
-token = ""
+token = "afed17089f3ab7dfc88d3c263bc1edeaed4770b9312d73b7838b78e71646bd8c37f57764d1612ca737f46"
 
 vk = vk_api.VkApi(token=token)
 longpoll = VkLongPoll(vk)

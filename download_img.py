@@ -9,6 +9,8 @@ def url_getting(stroka_egora):
     soup = BeautifulSoup(page.text, 'html.parser')
     a = soup.find('img')
     a = str(a)
+    print(a)
+    print()
     url_of_photo = a[32:-3]
     idd = stroka_egora[:-10]
     vk_user_data.append(url_of_photo)
@@ -18,12 +20,5 @@ def url_getting(stroka_egora):
 
 def download_image_func(vk_str):
     vk_user_data = url_getting(vk_str)
-    path = "/home/Documents/hakaton_fbr/photos/"
-    urllib.request.urlretrieve(vk_user_data[0],path+'.jpg')  
-    file = open(path+".txt", 'w')
-    file.write(vk_user_data[1])
-
-
-stroka_egora = "50210887_456239258"
-url = url_getting(stroka_egora)
-download_image(url) 
+    path = "/home/fixed/Documents/hakaton_fbr/registered_photos/"
+    urllib.request.urlretrieve(vk_user_data[0],path+ vk_user_data[1] +'.jpg')

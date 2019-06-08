@@ -1,6 +1,7 @@
 import bs4 as bs4
 import requests
 import json
+from download_img import download_image_func
 from vk_api.keyboard import VkKeyboard, VkKeyboardColor
 
 class VkBot:
@@ -18,12 +19,12 @@ class VkBot:
 
     def new_message(self, event):
         message = event.text
-        print(event.attachments['attach1'])
 
         if message.upper() == self._COMMANDS[0]:
             return {"text": f"Hello, {self._USERNAME}! Me commands: 'UPLOAD PHOTO', 'FIND SOMEONE'", "keyboard": None}
 
         elif message.upper() == self._COMMANDS[1]:
+            download_image_func(event.attachments['attach1'])
             return {"text": "Send me your photo", "keyboard": None}
 
         elif message.upper() == self._COMMANDS[2]:
