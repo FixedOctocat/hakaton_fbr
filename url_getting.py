@@ -8,4 +8,5 @@ def url_getting_func(str):
     a = soup.find('img')
     a = str(a)
     url_of_photo = a[32:-3]
-return url_of_photo
+    
+    return url_of_photo
