@@ -16,7 +16,6 @@ def url_getting(stroka_egora):
     vk_user_data.append(url_of_photo)
     vk_user_data.append(idd)
     return vk_user_data
-    
 
 def download_image_func(vk_str):
     vk_user_data = url_getting(vk_str)
