@@ -8,7 +8,7 @@ class VkBot:
         print("Bot created")
         self._USER_ID = user_id
         self._USERNAME = self._get_user_name_from_vk_id(user_id)
-        self._COMMANDS = ["Hello", "Upload photo", "Find someone"]
+        self._COMMANDS = ["HELLO", "UPLOAD PHOTO", "FIND SOMEONE"]
 
     def _get_user_name_from_vk_id(self, user_id):
         request = requests.get("https://vk.com/id"+str(user_id))
@@ -16,13 +16,34 @@ class VkBot:
         user_name = self._clean_all_tag_from_str(bs.findAll("title")[0])
         return user_name.split()[0]
 
-    def new_message(self, message):
+    def new_message(self, event):
+        message = event.text
+        print(event.attachments['attach1'])
+
         if message.upper() == self._COMMANDS[0]:
-            keyboard = VkKeyboard(one_time=False)
-            keyboard.add_button('Upload photo', color=VkKeyboardColor.DEFAULT)
-            keyboard.add_button('Find someone', color=VkKeyboardColor.DEFAULT)
-            return {"text": f"Hello, {self._USERNAME}!", "keyboard": keyboard.get_keyboard()}
+            return {"text": f"Hello, {self._USERNAME}! Me commands: 'UPLOAD PHOTO', 'FIND SOMEONE'", "keyboard": None}
 
         elif message.upper() == self._COMMANDS[1]:
-            weather = self._get_weather()
-            return {"text": wait for your photo, "keyboard": None}
+            return {"text": "Send me your photo", "keyboard": None}
+
+        elif message.upper() == self._COMMANDS[2]:
+            return {"text": "Send somebodies photo", "keyboard": None}
+
+        else:
+            return {"text": "??????", "keyboard": None}
+
+    @staticmethod
+    def _clean_all_tag_from_str(string_line):
+        result = ""
+        not_skip = True
+        for i in list(string_line):
+            if not_skip:
+                if i == "<":
+                    not_skip = False
+                else:
+                    result += i
+            else:
+                if i == ">":
+                    not_skip = True
+
+        return result
