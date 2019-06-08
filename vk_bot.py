@@ -5,10 +5,10 @@ from vk_api.keyboard import VkKeyboard, VkKeyboardColor
 
 class VkBot:
     def __init__(self, user_id):
-        print("Создан объект бота!")
+        print("РЎРѕР·РґР°РЅ РѕР±СЉРµРєС‚ Р±РѕС‚Р°!")
         self._USER_ID = user_id
         self._USERNAME = self._get_user_name_from_vk_id(user_id)
-        self._COMMANDS = ["ПРИВЕТ", "ПОГОДА", "ДЕЛА", "РАБОТАТЬ", "15 МИНУТ", "30 МИНУТ", "45 МИНУТ", "ЧАС?!"]
+        self._COMMANDS = ["Привет"]
 
     def _get_user_name_from_vk_id(self, user_id):
         request = requests.get("https://vk.com/id"+str(user_id))
@@ -19,44 +19,16 @@ class VkBot:
     def new_message(self, message):
         if message.upper() == self._COMMANDS[0]:
             keyboard = VkKeyboard(one_time=False)
-            keyboard.add_button('Дела', color=VkKeyboardColor.DEFAULT)
-            keyboard.add_button('Погода', color=VkKeyboardColor.DEFAULT)
-            return {"text": f"Привет, {self._USERNAME}!", "keyboard": keyboard.get_keyboard(), "thread": None}
+            keyboard.add_button('Р”РµР»Р°', color=VkKeyboardColor.DEFAULT)
+            keyboard.add_button('РџРѕРіРѕРґР°', color=VkKeyboardColor.DEFAULT)
+            return {"text": f"РџСЂРёРІРµС‚, {self._USERNAME}!", "keyboard": keyboard.get_keyboard(), "thread": None}
 
         elif message.upper() == self._COMMANDS[1]:
             weather = self._get_weather()
             return {"text": weather, "keyboard": None, "thread": None}
         
-        elif message.upper() == self._COMMANDS[2]:
-            keyboard = VkKeyboard(one_time=True)
-            keyboard.add_button('Работать', color=VkKeyboardColor.DEFAULT)
-            return {"text": f"Что будешь делать, {self._USERNAME}?", "keyboard": keyboard.get_keyboard(), "thread": None}
-
-        elif message.upper() == self._COMMANDS[3]:
-            keyboard = VkKeyboard(one_time=True)
-            keyboard.add_button('15 минут', color=VkKeyboardColor.DEFAULT)
-            keyboard.add_button('30 минут', color=VkKeyboardColor.DEFAULT)
-            keyboard.add_button('45 минут', color=VkKeyboardColor.DEFAULT)
-            keyboard.add_button('Час?!', color=VkKeyboardColor.DEFAULT)
-            return {"text": f"Сколько хочешь поработать?", "keyboard": keyboard.get_keyboard(), "thread": None}
-
-        elif message.upper() == self._COMMANDS[4]:
-            return {"text": f"Жду тебя через 15 минут)", "keyboard": None, "thread": "work", "time": 15}
-
-        elif message.upper() == self._COMMANDS[5]:
-            return {"text": f"Заходи через полчасика", "keyboard": None, "thread": "work", "time": 30}
-
-        elif message.upper() == self._COMMANDS[6]:
-            return {"text": f"У тебя есть один академический час", "keyboard": None, "thread": "work", "time": 45}
-
-        elif message.upper() == self._COMMANDS[7]:
-            return {"text": f"Ты безумец, лучше не пользуйся мной больше", "keyboard": None, "thread": "work", "time": 60}    
-
-        else:
-            return {"text": "Не понимаю о чем ты...", "keyboard": None, "thread": None}
-
     def _get_time(self):
-        request = requests.get("https://my-calend.ru/date-and-time-tod54куay")
+        request = requests.get("https://my-calend.ru/date-and-time-tod54РєСѓay")
         b = bs4.BeautifulSoup(request.text, "html.parser")
         return self._clean_all_tag_from_str(str(b.select(".page")[0].findAll("h2")[1])).split()[1]
 
@@ -78,9 +50,9 @@ class VkBot:
         return result
 
     @staticmethod
-    def _get_weather(city: str = "москва") -> list:
+    def _get_weather(city: str = "РјРѕСЃРєРІР°") -> list:
 
-        request = requests.get("https://sinoptik.com.ru/погода-" + city)
+        request = requests.get("https://sinoptik.com.ru/РїРѕРіРѕРґР°-" + city)
         b = bs4.BeautifulSoup(request.text, "html.parser")
 
         p3 = b.select('.temperature .p3')
@@ -93,8 +65,8 @@ class VkBot:
         weather4 = p6[0].getText()
 
         result = ''
-        result = result + ('Утром :' + weather1 + ' ' + weather2) + '\n'
-        result = result + ('Днём :' + weather3 + ' ' + weather4) + '\n'
+        result = result + ('РЈС‚СЂРѕРј :' + weather1 + ' ' + weather2) + '\n'
+        result = result + ('Р”РЅС‘Рј :' + weather3 + ' ' + weather4) + '\n'
         temp = b.select('.rSide .description')
         weather = temp[0].getText()
         result = result + weather.strip()
