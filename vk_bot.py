@@ -3,6 +3,7 @@ import requests
 import json
 from download_img import download_image_func, download_image_func_1
 from vk_api.keyboard import VkKeyboard, VkKeyboardColor
+from face_compare import open_files
 
 class VkBot:
     def __init__(self, user_id):
@@ -28,7 +29,8 @@ class VkBot:
             return {"text": "Send me your photo", "keyboard": None}
 
         elif message.upper() == self._COMMANDS[2]:
-            download_image_func_1(event.attachments['attach1'])
+            file = download_image_func_1(event.attachments['attach1'])
+            open_files(file)
             return {"text": "Send somebodies photo", "keyboard": None}
 
         else:

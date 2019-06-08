@@ -14,6 +14,6 @@ def face_compare_func(img1, img2):
         return False
 
 def open_files(img):
-    for filename in glob.glob('*.jpg'):
+    for filename in glob.glob('registered_photo' + '*.jpg'):
         f = open(filename)
-        face_compare_func(f, img)
+        print(face_compare_func(f, 'photo/' + img))
