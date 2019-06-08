@@ -1,6 +1,6 @@
 import face_recognition
 
-def face_compare(img1, img2):
+def face_compare_func(img1, img2):
     face = face_recognition.load_image_file(img1)
     face = face_recognition.face_encodings(face)[0]
     unknown_picture = face_recognition.load_image_file(img2)
