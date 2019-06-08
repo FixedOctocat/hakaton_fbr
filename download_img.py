@@ -21,3 +21,8 @@ def download_image_func(vk_str):
     vk_user_data = url_getting(vk_str)
     path = "/home/fixed/Documents/hakaton_fbr/registered_photos/"
     urllib.request.urlretrieve(vk_user_data[0],path+ vk_user_data[1] +'.jpg')
+
+def download_image_func_1(vk_str):
+    vk_user_data = url_getting(vk_str)
+    path = "/home/fixed/Documents/hakaton_fbr/photos/"
+    urllib.request.urlretrieve(vk_user_data[0],path+ vk_user_data[1] +'.jpg')
